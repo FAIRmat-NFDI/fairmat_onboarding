@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -9,7 +10,6 @@ from nomad.datamodel.data import (
     ArchiveSection,
     Schema,
     UseCaseElnCategory,
-    UserReference,
 )
 from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
 from nomad.metainfo import Datetime, MEnum, Quantity, SchemaPackage, Section, SubSection
@@ -21,8 +21,45 @@ configuration = config.get_plugin_entry_point(
 m_package = SchemaPackage()
 
 
+def _unique_clean(values: Iterable[str] | None) -> list[str]:
+    out: list[str] = []
+    for v in values or []:
+        if v is None:
+            continue
+        cleaned = v.strip() if isinstance(v, str) else v
+        if not cleaned:
+            continue
+        if cleaned not in out:
+            out.append(cleaned)
+    return out
+
+
+class ResearchTopicTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
+class MaterialSystemTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
+class ResearchMethodTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
 class ResearchFocus(ArchiveSection):
-    m_def = Section(label='Research Focus')
+    m_def = Section(
+        label='Research Focus',
+        a_eln={
+            'hide': [
+                'research_topic_terms',
+                'material_system_terms',
+                'research_method_terms',
+            ]
+        },
+    )
 
     research_type = Quantity(
     type=MEnum('1- Experimental', '2- Computational', '3- Both'),
@@ -78,8 +115,33 @@ class ResearchFocus(ArchiveSection):
         a_eln=ELNAnnotation(component=ELNComponentEnum.RichTextEditQuantity),
     )
 
+    research_topic_terms = SubSection(section_def=ResearchTopicTerm, repeats=True)
+    material_system_terms = SubSection(section_def=MaterialSystemTerm, repeats=True)
+    research_method_terms = SubSection(section_def=ResearchMethodTerm, repeats=True)
+
+    def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
+        super().normalize(archive, logger)
+        self.research_topic_terms = [
+            ResearchTopicTerm(value=v) for v in _unique_clean(self.research_topics)
+        ]
+        self.material_system_terms = [
+            MaterialSystemTerm(value=v) for v in _unique_clean(self.material_systems)
+        ]
+        self.research_method_terms = [
+            ResearchMethodTerm(value=v) for v in _unique_clean(self.research_methods)
+        ]
+
+
+class FileFormatTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
 class ResearchData(ArchiveSection):
-    m_def = Section(label='Research Data')
+    m_def = Section(
+        label='Research Data',
+        a_eln={'hide': ['file_format_terms']},
+    )
 
     name = Quantity(
     type=str,
@@ -137,9 +199,30 @@ class ResearchData(ArchiveSection):
         a_eln=ELNAnnotation(component=ELNComponentEnum.StringEditQuantity),
     )
 
+    file_format_terms = SubSection(section_def=FileFormatTerm, repeats=True)
+
+    def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
+        super().normalize(archive, logger)
+        self.file_format_terms = [
+            FileFormatTerm(value=v) for v in _unique_clean(self.file_format)
+        ]
+
+
+class TrainingTopicTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
+class NomadServiceTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
 
 class NomadUsage(ArchiveSection):
-    m_def = Section(label='NOMAD Usage')
+    m_def = Section(
+        label='NOMAD Usage',
+        a_eln={'hide': ['training_topic_terms', 'nomad_service_terms']},
+    )
 
     using_nomad = Quantity(
         type=MEnum('Yes', 'No', 'Planning to'),
@@ -197,7 +280,7 @@ class NomadUsage(ArchiveSection):
             '4- Plugin development',
             '5- ELN usage',
             '6- Hosting and administration of NOMAD Oasis',
-            '7- other',
+            '7- Other',
         ),
         shape=['*'],
         label='which training topics are relevant for your group\'s current or upcoming needs?',
@@ -228,6 +311,18 @@ class NomadUsage(ArchiveSection):
         'with NOMAD.',
         a_eln=ELNAnnotation(component=ELNComponentEnum.RichTextEditQuantity),
     )
+
+    training_topic_terms = SubSection(section_def=TrainingTopicTerm, repeats=True)
+    nomad_service_terms = SubSection(section_def=NomadServiceTerm, repeats=True)
+
+    def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
+        super().normalize(archive, logger)
+        self.training_topic_terms = [
+            TrainingTopicTerm(value=v) for v in _unique_clean(self.training_topics)
+        ]
+        self.nomad_service_terms = [
+            NomadServiceTerm(value=v) for v in _unique_clean(self.nomad_services)
+        ]
 
 
 class ResearchDataManagement(ArchiveSection):
@@ -307,11 +402,10 @@ class OnboardingAdministration(ArchiveSection):
     )
 
     interviewers = Quantity(
-        type=UserReference,
-        shape=['*'],
+        type=str,
         label='interviewers',
-        description='Select the NOMAD users who conducted or will conduct the interview.',
-        a_eln=ELNAnnotation(component=ELNComponentEnum.AuthorEditQuantity),
+        description='Name(s) of the interviewer(s) who conducted or will conduct the interview.',
+        a_eln=ELNAnnotation(component=ELNComponentEnum.StringEditQuantity),
     )
 
     remarks = Quantity(
@@ -329,10 +423,32 @@ class OnboardingAdministration(ArchiveSection):
     )
 
 
+class InstitutionTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
+class FairmatAreaTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
+class RelatedProjectTerm(ArchiveSection):
+    m_def = Section(a_eln={'hide': ['value']})
+    value = Quantity(type=str)
+
+
 class PIOnboardingQuestionnaire(Schema):
     m_def = Section(
         label='FAIRmat PI Onboarding',
         categories=[UseCaseElnCategory],
+        a_eln={
+            'hide': [
+                'institution_terms',
+                'fairmat_area_terms',
+                'related_project_terms',
+            ]
+        },
     )
 
     pi_name = Quantity(
@@ -428,9 +544,21 @@ class PIOnboardingQuestionnaire(Schema):
     research_data_management = SubSection(section_def=ResearchDataManagement)
     NOMAD_usage = SubSection(section_def=NomadUsage)
     onboarding_administration = SubSection(section_def=OnboardingAdministration)
+    institution_terms = SubSection(section_def=InstitutionTerm, repeats=True)
+    fairmat_area_terms = SubSection(section_def=FairmatAreaTerm, repeats=True)
+    related_project_terms = SubSection(section_def=RelatedProjectTerm, repeats=True)
 
     def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
         super().normalize(archive, logger)
+        self.institution_terms = [
+            InstitutionTerm(value=v) for v in _unique_clean(self.institutions)
+        ]
+        self.fairmat_area_terms = [
+            FairmatAreaTerm(value=v) for v in _unique_clean(self.fairmat_areas)
+        ]
+        self.related_project_terms = [
+            RelatedProjectTerm(value=v) for v in _unique_clean(self.related_projects)
+        ]
 
 
 m_package.__init_metainfo__()

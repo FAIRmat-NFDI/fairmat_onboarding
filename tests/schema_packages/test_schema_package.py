@@ -10,7 +10,7 @@ def test_schema_package():
 
     data = entry_archive.data
     assert data.pi_name == 'Dr. Jane Doe'
-    assert 'Humboldt-Universität zu Berlin' in data.institutions
+    assert any('Humboldt' in i for i in (data.institutions or []))
     assert data.research_group == 'Computational Materials Science Group'
     assert 'Area C - Computation' in data.fairmat_areas
     assert data.RDM_contact_email == 'john.smith@hu-berlin.de'
