@@ -19,7 +19,10 @@ def test_schema_package():
     assert data.research_focus.research_type == '2- Computational'
     assert data.NOMAD_usage.using_nomad == 'Yes'
     assert '4- Plugin development' in data.NOMAD_usage.training_topics
-    assert data.research_data_management.research_data[0].data_type == '1- DFT calculations'
+    assert (
+        data.research_data_management.research_data[0].data_type
+        == '1- DFT calculations'
+    )
 
 
 def test_reviewer_group_added():
