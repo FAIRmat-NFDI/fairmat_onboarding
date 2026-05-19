@@ -25,7 +25,9 @@ Q_RESEARCH_METHODS = f'data.research_focus.research_method_terms.value#{SCHEMA}'
 
 # Research Data
 Q_DATA_TYPE = f'data.research_data_management.research_data.data_type#{SCHEMA}'
-Q_FILE_FORMAT = f'data.research_data_management.research_data.file_format_terms.value#{SCHEMA}'
+Q_FILE_FORMAT = (
+    f'data.research_data_management.research_data.file_format_terms.value#{SCHEMA}'
+)
 
 # NOMAD Usage
 Q_TRAINING_TOPICS = f'data.NOMAD_usage.training_topic_terms.value#{SCHEMA}'
