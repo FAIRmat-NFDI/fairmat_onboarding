@@ -1,6 +1,5 @@
 # Onboarding of FAIRmat PIs
 
-
 ## Onboarding process
 
 The onboarding of FAIRmat PIs is designed as a collaborative process that includes:
@@ -12,6 +11,10 @@ The onboarding of FAIRmat PIs is designed as a collaborative process that includ
 
 As part of this process, the onboarding form is integrated directly into a dedicated [**NOMAD Oasis**](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis/) for managing FAIRmat's project information.
 This provides you with a **first hands-on interaction with the platform**, while ensuring that the collected information is structured, reusable, and aligned with FAIR principles from the beginning.
+
+!!! note "Which NOMAD deployment to use"
+    Please use the **FAIRmat Outreach NOMAD Oasis** to complete the onboarding form — not the public NOMAD Central.
+    The direct link is: [https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis){:target="_blank" rel="noopener"}
 
 ---
 <div markdown="block" class="home-grid">

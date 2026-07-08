@@ -1,6 +1,13 @@
 # Instructions for FAIRmat PI onboarding
 
-This page provides instructions for completing the onboarding form in the [FAIRmat Outreach NOMAD Oasis](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis) deployment. The collected information helps FAIRmat understand your research activities, data workflows, current research data management practices, and potential integration points with NOMAD services and infrastructure.
+!!! danger "Use the FAIRmat Outreach NOMAD Oasis — not NOMAD Central"
+    The onboarding form must be completed in the dedicated **FAIRmat Outreach NOMAD Oasis**:
+
+    **[https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis){:target="_blank" rel="noopener"}**
+
+    This is a separate deployment from the public NOMAD Central. Please do **not** use NOMAD Central to complete the onboarding form.
+
+This page provides instructions for completing the onboarding form in the [FAIRmat Outreach NOMAD Oasis](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis){:target="_blank" rel="noopener"}. The collected information helps FAIRmat understand your research activities, data workflows, current research data management practices, and potential integration points with NOMAD services and infrastructure.
 
 ## Create a NOMAD user account
 
@@ -30,6 +37,10 @@ If you already have a NOMAD account, you can use the same account credentials to
 ---
 
 ## Create new upload
+
+!!! note "Reminder: open the FAIRmat Outreach NOMAD Oasis"
+    All steps below must be performed in the **FAIRmat Outreach NOMAD Oasis**:
+    [https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis){:target="_blank" rel="noopener"}
 
 In NOMAD, uploads are used to organize and manage related files and entries. During the FAIRmat PI onboarding process, you will create an upload that contains your onboarding form and related information.
 
