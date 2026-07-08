@@ -16,6 +16,10 @@ This provides you with a **first hands-on interaction with the platform**, while
     Please use the **FAIRmat Outreach NOMAD Oasis** to complete the onboarding form — not the public NOMAD Central.
     The direct link is: [https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis](https://fairmat-oasis.physik.hu-berlin.de/nomad-oasis){:target="_blank" rel="noopener"}
 
+<div align="center" markdown>
+[View step-by-step instructions](tutorial/tutorial.md){ .md-button .md-button--primary }
+</div>
+
 ---
 <div markdown="block" class="home-grid">
 <div markdown="block">
