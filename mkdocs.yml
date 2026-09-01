@@ -1,4 +1,4 @@
-site_name: FAIRmat-onboarding
+site_name: fairmat-onboarding
 site_description: This NOMAD schema plugin provides a structured questionnaire designed to collect key information from newly onboarded FAIRmat Principal Investigators (PIs). It captures details on the research focus, domain expertise, and research data management practices of the PI’s group.
 site_author: Ahmed Mansour
 

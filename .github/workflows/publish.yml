@@ -36,7 +36,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   environment:
   #     name: pypi
-  #     url: https://pypi.org/p/FAIRmat-onboarding
+  #     url: https://pypi.org/p/fairmat-onboarding
   #   permissions:
   #     id-token: write
   #   steps:
