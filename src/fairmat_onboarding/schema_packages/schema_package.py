@@ -482,6 +482,9 @@ class PIOnboardingQuestionnaire(Schema):
     )
 
     fairmat_areas = Quantity(
+        # Area labels kept consistent across all FAIRmat plugins
+        # (fairmat-members, fairmat-onboarding, fairmat-events-form): the word
+        # 'Area', the letter, a ' - ' separator, then the name.
         type=MEnum(
             'Area A - Synthesis',
             'Area B - Experiment',

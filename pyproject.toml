@@ -29,7 +29,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/ahm531/FAIRmat-onboarding"
+Repository = "https://github.com/FAIRmat-NFDI/fairmat_onboarding"
 
 [project.optional-dependencies]
 dev = [
