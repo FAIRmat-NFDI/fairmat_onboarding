@@ -1,4 +1,4 @@
-# FAIRmat-onboarding
+# fairmat-onboarding
 
 This NOMAD schema plugin provides a structured questionnaire designed to collect key information from newly onboarded FAIRmat Principal Investigators (PIs). It captures details on the research focus, domain expertise, and research data management practices of the PI’s group.
 
@@ -109,7 +109,7 @@ Read the [NOMAD plugin documentation](https://nomad-lab.eu/prod/v1/staging/docs/
 We now recommend using the dedicated [`nomad-distro-dev`](https://github.com/FAIRmat-NFDI/nomad-distro-dev) repository to simplify the process. Please refer to that repository for detailed instructions.
 
 ## Publish note
-In the [GitHub actions workflow](./.github/workflows/publish.yml) for publishing the FAIRmat-onboarding plugin to PyPI, we commented out the `deploy` job . If you want to publish the plugin to `PyPI`, you need to set up your project in `PyPI`. There are several online tutorials on publishing a Python package to PyPI, e.g., [How to Publish a Python Package to PyPI](https://realpython.com/pypi-publish-python-package/). After that, you can uncomment the `deploy` job in the workflow file and push the changes to GitHub. The workflow will be triggered and the package will be published to `PyPI` when you create a new release on GitHub.
+In the [GitHub actions workflow](./.github/workflows/publish.yml) for publishing the fairmat-onboarding plugin to PyPI, we commented out the `deploy` job . If you want to publish the plugin to `PyPI`, you need to set up your project in `PyPI`. There are several online tutorials on publishing a Python package to PyPI, e.g., [How to Publish a Python Package to PyPI](https://realpython.com/pypi-publish-python-package/). After that, you can uncomment the `deploy` job in the workflow file and push the changes to GitHub. The workflow will be triggered and the package will be published to `PyPI` when you create a new release on GitHub.
 
 ### Template update
 

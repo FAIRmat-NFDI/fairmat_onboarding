@@ -12,7 +12,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: Apache Software License",
 ]
-name = "FAIRmat-onboarding"
+name = "fairmat-onboarding"
 description = "This NOMAD schema plugin provides a structured questionnaire designed to collect key information from newly onboarded FAIRmat Principal Investigators (PIs). It captures details on the research focus, domain expertise, and research data management practices of the PI’s group."
 version = "0.1.0"
 readme = "README.md"
